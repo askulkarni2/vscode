@@ -1,16 +1,20 @@
 {
     "name": "Dev Container Definition - AWS CDK",
-    "image": "public.ecr.aws/pahudnet/vscode:latest",
-    "workspaceFolder": "/workspace",
-    "workspaceMount": "source=remote-workspace,target=/workspace,type=volume",
+    "dockerFile": "Dockerfile",
     "mounts": [
-        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+        "source=/Users/kuapoorv/.aws/config,target=/home/vscode/.aws/config,type=bind",
+        "source=/Users/kuapoorv/.ssh,target=/home/vscode/.ssh,type=bind"
     ],
     "containerUser": "vscode",
-    "postCreateCommand": [
-        ".devcontainer/bin/setup.sh"
-    ],
     "extensions": [
-        "dbaeumer.vscode-eslint@2.1.5"
-    ]
+		"dbaeumer.vscode-eslint@2.1.5",
+		"amazonwebservices.aws-toolkit-vscode"
+	],
+    "postCreateCommand": "aws configure set credential_process /usr/local/bin/aws-sso-credential-process",
+    "containerEnv": {
+        "AWS_SHARED_CREDENTIALS_FILE": "~/.aws/config",
+        "AWS_DEFAULT_REGION": "us-west-2",
+        "GITHUB_TOKEN": "${localEnv:GITHUB_TOKEN}"
+    }
 }

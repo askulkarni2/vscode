@@ -1,25 +1,10 @@
 # vscode
-VSCode template for CDK development workspace
 
-public dockder image:
+VSCode template for typescript development workspace
 
-`public.ecr.aws/pahudnet/vscode:latest`
-
-# AWS SSO for AWS CDK
-
-Configure your `default` AWS_PROFILE with AWS SSO
-```sh
-aws configure sso --profile default 
-```
-
-Configure `credential_process` for the `default` profile
-
-```sh
-aws configure set credential_process ${PWD}/.devcontainer/bin/aws-sso-credential-process
-```
-
-export `AWS_SHARED_CREDENTIALS_FILE` 
-
-```sh
-export AWS_SHARED_CREDENTIALS_FILE=~/.aws/config
-```
+1. Install [Visual Studio Code Remote - Containers extension](https://code.visualstudio.com/docs/remote/containers)
+2. Clone this repo, copy the `.devcontainer` directory to your workspace
+3. Edit `.devcontainer/devcontainer.json` as per your settings. Pay special attention to 'mounts` and `containerEnv`.
+4. Edit `.devcontainer/Dockerfile` for any changes you wish to make
+5. Export GITHUB_TOKEN to your shell (or add it to your `.[ba|z]shrc` file)
+4. Load your workspace in the Container using the extension -> this will first build the container using the Dockerfile and then load your workspace directory in `/workspaces` in your container.

@@ -40,7 +40,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | b
     source ~/.zshrc && \
     nvm install 14
 
-RUN sudo npm install --force -g yarn aws-cdk
+RUN sudo npm install --force -g yarn aws-cdk projen
 
 RUN mkdir -p /home/${USERNAME}/.aws && aws configure set \
     credential_process /usr/local/bin/aws-sso-credential-process
